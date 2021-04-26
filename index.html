@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Formulário de Pesquisa Led Sorocaba</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f6f6 ;
+        }
+        .container {
+            display: block;
+            max-width: 500px;
+            max-height: 85%;
+            padding-top: 25px ;
+            border: 1px solid rgb(1, 71, 7);
+            background: linear-gradient(rgb(0, 133, 11), rgb(1, 71, 7) );
+            margin-top: 25px;
+            border-radius: 20px;
+        }
+    	div {
+            padding: 10px;
+            background-color: #f6f6f6;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .bk {
+            background-color:rgba(0, 133, 11,.1);
+        }
+        .logo {
+            background: rgba(0, 133, 11,);
+            border-radius: 50%;
+            width: fit-content;
+            border: 0;
+            padding: 0;
+        }
+    	input[type=text], textarea, select {
+            font: 17px Calibri;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type=button]{ 
+            font: 17px Calibri;
+            width: auto;
+            float: right;
+            cursor: pointer;
+            padding: 7px 30px;
+            border-radius: 8px;
+            border-color: rgb(197, 195, 195);
+        }
+    </style>
+</head>
+<body>
+    <div>
+        
+        <!--Add few elements to the form-->
+<div class="container">
+       
+        <div class="logo">
+            <img style="width: 75px;" src="logo1.png" alt="logo">
+        </div>
+        
+        <div class="bk">
+            <input type="text" id="txtName" placeholder="Qual seu nome?" />
+        </div>
+        <div class="bk">
+            <input type="text" id="txtAge" placeholder="Qual é sua idade?" />
+        </div>
+        
+            <div class="bk">
+            <select id="simounao">
+                <option selected value="">Algo te chamou a atenção na frente da loja?</option>
+                <option value="Mostruario">A iluminção do mostruário</option>
+                <option value="PainelLed">O painel de LED passando mensgens com fitas verdes</option>
+                <option value="Mangueiras">As mangueiras de Jardim na frente da loja</option>
+                <option value="CorParede">A cor verde da parede </option>
+                <option value="NenhumaDasOpções">Nenhuma das opções </option>
+
+            </select>
+            </div>
+            <div class="bk">
+            <select id="selCountry">
+                <option selected value="Sorocaba">Atualmente moro em Sorocaba-Sp</option>
+                <option value="Outro">Outro</option>
+            </select>
+        </div>
+        <div class="bk">
+            <textarea id="msg" name="msg" placeholder="Deixe sua opinião aqui..." style="height:100px"></textarea>
+        </div>
+        <div class="bk">
+            <input type="button" id="bt" value="Enviar" onclick="saveFile()"/>
+        </div>
+
+    </div>
+</div>    
+</body>
+<script>
+    let saveFile = () => {
+    	
+        // Get the data from each element on the form.
+    	const name = document.getElementById('txtName');
+        const age = document.getElementById('txtAge');
+        const simounao = document.getElementById('simounao');
+
+        const country = document.getElementById('selCountry');
+        const msg = document.getElementById('msg');
+        
+        // This variable stores all the data.
+        let data = 
+            '\r Nome: ' + name.value + ' \r\n ' + 
+            'Idade: ' + age.value + ' \r\n ' + 
+            'O que me chamou a atenção foi: ' + simounao.value + ' \r\n' + 
+            ' Cidade: ' + country.value + ' \r\n ' + 
+            'Opinião: ' + msg.value;
+        
+        // Convert the text to BLOB.
+        const textToBLOB = new Blob([data], { type: 'text/plain' });
+        const sFileName = name.value + ' - ' + simounao.value + '.txt';	   // The file to save the data.
+
+        let newLink = document.createElement("a");
+        newLink.download = sFileName;
+
+        if (window.webkitURL != null) {
+            newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+            window.location.reload();
+        }
+        else {
+            newLink.href = window.URL.createObjectURL(textToBLOB);
+            newLink.style.display = "none";
+            document.body.appendChild(newLink);
+            window.location.reload();
+        }
+
+        newLink.click(); 
+        
+    }
+
+
+</script>
+</html>
