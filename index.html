@@ -8,50 +8,72 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: #f6f6f6 ;
+            background-color: #186800 ;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color:rgb(255, 253, 253);
+            font-size: 25px;
         }
         .container {
-            display: block;
-            max-width: 500px;
-            max-height: 85%;
-            padding-top: 25px ;
-            border: 1px solid rgb(1, 71, 7);
+            
+            display: flex;
+            max-width: 701px;
+            height: 670px;
             background: linear-gradient(rgb(0, 133, 11), rgb(1, 71, 7) );
-            margin-top: 25px;
+            margin-top: 3%;
             border-radius: 20px;
         }
     	div {
             padding: 10px;
-            background-color: #f6f6f6;
+            background-color: #186800;
             overflow: hidden;
             margin: 0 auto;
         }
-        .bk {
-            background-color:rgba(0, 133, 11,.1);
+        
+        .form{
+            margin: 0 11px 0 11px;
+            border-radius: 4px;
+        }
+        #simounao input {
+            margin-bottom: 17px;
         }
         .logo {
-            background: rgba(0, 133, 11,);
-            border-radius: 50%;
-            width: fit-content;
-            border: 0;
-            padding: 0;
+            width: 300px;
+            
         }
     	input[type=text], textarea, select {
-            font: 17px Calibri;
             width: 100%;
             padding: 12px;
-            border: 1px solid #ccc;
+            border: 1px solid rgb(255, 255, 255);
             border-radius: 4px;
         }
         input[type=button]{ 
-            font: 17px Calibri;
             width: auto;
             float: right;
             cursor: pointer;
             padding: 7px 30px;
             border-radius: 8px;
-            border-color: rgb(197, 195, 195);
+            border-color: rgb(233, 233, 233);
         }
+        .col1{
+            width: 350px;
+            border-radius: 20px 0px 0px 20px;
+            margin-right: .5px;
+        }
+        .col2{
+            width: 350px;
+            border-radius: 0px 20px 20px 0px;
+            margin: 0 auto;
+            margin-left: .5px;
+        }
+
+        #txtAge, ::placeholder{
+            color: white;
+            
+        }
+        #bot {
+            margin-top: 230px;
+        }
+        
     </style>
 </head>
 <body>
@@ -60,17 +82,36 @@
         <!--Add few elements to the form-->
 <div class="container">
        
-        <div class="logo">
-            <img style="width: 75px;" src="logo1.png" alt="logo">
-        </div>
+       
         
+        <div class="col1">
+            <div class="logo">
+                <img style="width: 75px;" src="logo1.png" alt="logo">
+            </div>
         <div class="bk">
             <input type="text" id="txtName" placeholder="Qual seu nome?" />
         </div>
         <div class="bk">
             <input type="text" id="txtAge" placeholder="Qual é sua idade?" />
         </div>
-        
+
+        <div class="form">
+            <h3>O que mais chamou sua atenção na frente da loja? (Selecione Abaixo) </h3><br>
+        <form id="simounao" action="/action_page.php">
+            <input type="checkbox" id="most" onclick="mostt" name="vehicle1" value="Mostruario">
+            <label for="vehicle1"> Iluminação do mostruário</label><br><hr>
+            <input type="checkbox" id="pfitas" onclick="mostt" name="vehicle2" value="Painel de Led">
+            <label for="vehicle2"> Painel LED com fitas verdes</label><br><hr>
+            <input type="checkbox" id="cf" onclick="mostt" name="vehicle3" value="Cor da fachada">
+            <label for="vehicle3"> Cor da Fachada</label><br><hr>
+            <input type="checkbox" id="org" onclick="mostt" name="vehicle3" value="Organização">
+            <label for="vehicle3"> Organização da loja</label><br><hr>
+            <input type="checkbox" id="nen" onclick="mostt" name="vehicle3" value="Nenhuma das opções">
+            <label for="vehicle3"> Nenhuma das opções</label><br>
+
+          </form>
+        </div>
+<!--
             <div class="bk">
             <select id="simounao">
                 <option selected value="">Algo te chamou a atenção na frente da loja?</option>
@@ -82,44 +123,112 @@
 
             </select>
             </div>
-            <div class="bk">
+-->
+            
+        
+    </div>
+    <div class="col2">
+        <div class="bk">
+            <div class="form">
+                <h3> Atualmente moro (Selecione Abaixo) </h3>
+            <form id="simounao2" action="/action_page.php">
+                <input type="checkbox" id="sor" onclick="local" name="vehicle1" value="Sorocaba">
+                <label for="vehicle1"> Sorocaba</label><br><hr>
+                <input type="checkbox" id="reg" onclick="local" name="vehicle2" value="Região">
+                <label for="vehicle2"> Região</label><br><hr>
+                <input type="checkbox" id="out" onclick="local" name="vehicle2" value="Outro">
+                <label for="vehicle2"> Outro</label><br><hr>
+            </form>
+            </div>
+        </div>
+            <!--
             <select id="selCountry">
                 <option selected value="Sorocaba">Atualmente moro em Sorocaba-Sp</option>
                 <option value="Outro">Outro</option>
             </select>
-        </div>
-        <div class="bk">
-            <textarea id="msg" name="msg" placeholder="Deixe sua opinião aqui..." style="height:100px"></textarea>
-        </div>
-        <div class="bk">
+            -->
+            
+            <div class="bk">
+                <textarea id="msg" name="msg" placeholder="Deixe sua sugestão..." style="height:100px"></textarea>
+            </div>
+        <div class="bk" id="bot">
             <input type="button" id="bt" value="Enviar" onclick="saveFile()"/>
         </div>
-
     </div>
+</div>
 </div>    
 </body>
 <script>
+
+   let mostt = () => {
+        if(most.checked === true){
+            return (most.value)
+        }else{
+        } 
+        if(pfitas.checked === true){
+            return (pfitas.value)
+        }else{
+
+        } 
+        if(cf.checked === true){
+            return (cf.value)
+        }else{
+        } 
+        if(org.checked === true){
+            return (org.value)
+        }else{
+        } 
+        if(nen.checked === true){
+            return (nen.value)
+        }
+    }     
+    let local = () => {
+        if(sor.checked === true){
+            return (sor.value)
+        }else{
+        } 
+        if(reg.checked === true){
+            return (reg.value)
+        }else{
+        }
+        if(out.checked === true){
+            return (out.value)
+        }else{
+        }
+    }          
+
     let saveFile = () => {
     	
         // Get the data from each element on the form.
     	const name = document.getElementById('txtName');
         const age = document.getElementById('txtAge');
-        const simounao = document.getElementById('simounao');
+        const most = document.getElementById('most');
+        const pfitas = document.getElementById('pfitas');
+        const cf = document.getElementById('cf');
+        const org = document.getElementById('org');
+        const nen = document.getElementById('nen');
+        const sor = document.getElementById('sor');
+        const reg = document.getElementById('reg');
+        const out = document.getElementById('out');
 
         const country = document.getElementById('selCountry');
         const msg = document.getElementById('msg');
         
+
         // This variable stores all the data.
         let data = 
             '\r Nome: ' + name.value + ' \r\n ' + 
             'Idade: ' + age.value + ' \r\n ' + 
-            'O que me chamou a atenção foi: ' + simounao.value + ' \r\n' + 
-            ' Cidade: ' + country.value + ' \r\n ' + 
+            'O que me chamou a atenção foi: ' + mostt() + ' \r\n' + 
+            ' Cidade: ' + local() + ' \r\n ' + 
             'Opinião: ' + msg.value;
         
+        
+
+
         // Convert the text to BLOB.
         const textToBLOB = new Blob([data], { type: 'text/plain' });
-        const sFileName = name.value + ' - ' + simounao.value + '.txt';	   // The file to save the data.
+        const sFileName = name.value +'.txt';	   // The file to save the data.
 
         let newLink = document.createElement("a");
         newLink.download = sFileName;
@@ -139,6 +248,6 @@
         
     }
 
-
 </script>
+
 </html>
